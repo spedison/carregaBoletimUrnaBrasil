@@ -10,12 +10,55 @@ repositories {
 }
 
 dependencies {
+
+    // biblioteca de manipulação de CSVs
+    implementation("org.apache.commons:commons-csv:1.10.0")
+    // Driver para conexão com o banco maria db.
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.5.0'
+    // Biblioteca de logging
+    implementation 'org.slf4j:jul-to-slf4j:2.0.9'
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+
+    // biblioteca de ORM para Hibernate
+    implementation 'org.hibernate.orm:hibernate-core:6.6.1.Final'
+    implementation 'org.hibernate.common:hibernate-commons-annotations:6.0.6.Final'
+    implementation 'jakarta.persistence:jakarta.persistence-api:2.2.3'
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+
+    // Biblioteca para facilitação de uso de VOs.
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.36'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    // Bibliotecas de teste unitários.
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
-application.
 
 test {
     useJUnitPlatform()
+}
+
+application {
+    mainClassName = 'br.com.spedison.Main'
+    // Opções de execução.
+    applicationDefaultJvmArgs = ["-Xms2g", "-Xmx40g"]
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.verbose = true
+    options.compilerArgs << "-Xlint:all"
+    //options.deprecation = true
+    options.showDeprecation = true
+    options.showWarnings = true
+}
+
+tasks.named('run', JavaExec) {
+    def argsFromProps = project.findProperty('argumentsProg') ?: ''
+    it.args = argsFromProps.split(' ').findAll { it }
 }
