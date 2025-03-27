@@ -1,8 +1,13 @@
 ## Carrega Boletim de Urna das Eleições do Brasil em base de dados para tratamento.
+## Carrega Boletim de Urna das Eleições do Brasil em base de dados para tratamento.
 
 # Onde estão os dados ?
 - Use a página do TSE : https://dadosabertos.tse.jus.br/dataset/resultados-2022-boletim-de-urna
+# Onde estão os dados ?
+- Use a página do TSE : https://dadosabertos.tse.jus.br/dataset/resultados-2022-boletim-de-urna
 
+# Como baixar os dados?
+- Use o plugin para os navegadores Google Chrome ou Vivaldi chamado "DownThenAll!" em https://www.downthemall.org
 # Como baixar os dados?
 - Use o plugin para os navegadores Google Chrome ou Vivaldi chamado "DownThenAll!" em https://www.downthemall.org
   
@@ -30,7 +35,32 @@ chmod +x files_bweb_linux_version.sh
 ```
   
 - Os arquivos são copiados para a pasta de downloads, remova os arquivos para uma pasta de trabalho.
+  Mas ele mostra todos os links, o que faço ?
+- Filtre somente por arquivos .zip (Compactados)
 
+ou 
+
+Utilize os scripts da pasta:  **carregaBoletimUrnaBrasil\src\main\resources\scripts**
+
+
+- files_bweb_win_version.ps1
+```shell
+  .\files_bweb_win_version.ps1
+```
+
+- files_bweb_linux_version.sh
+
+```shell
+chmod +x files_bweb_linux_version.sh
+```
+
+```shell
+./files_bweb_linux_version.sh
+```
+  
+- Os arquivos são copiados para a pasta de downloads, remova os arquivos para uma pasta de trabalho.
+
+- O que temos de informação no nome do arquivo :
 - O que temos de informação no nome do arquivo :
     Exemplo: bweb_1t_AL_051020221321.zip
    
@@ -45,6 +75,7 @@ _AL_      | Sigla do Estado
 .zip      | Extensão do Arquivo           
 
 # Quais arquivos tem nesse zip ?
+# Quais arquivos tem nesse zip ?
 
 ~~~bash
 $ unzip -l bweb_1t_AL_051020221321.zip 
@@ -58,11 +89,15 @@ Archive:  bweb_1t_AL_051020221321.zip
 ~~~
 
 - Vamos usar somente o arquivo: bweb_1t_AL_051020221321.csv
+- Vamos usar somente o arquivo: bweb_1t_AL_051020221321.csv
 
 # Formato do Arquivo:
 
 - O formato do arquivo está no arquivo : leiame-boletimurnaweb.pdf
+- O formato do arquivo está no arquivo : leiame-boletimurnaweb.pdf
 
 - O encoding utilizado é latim 1 segundo a especificação.
+- O encoding utilizado é latim 1 segundo a especificação.
 
+- A partir desse ponto, podemos iniciar o nosso processo para colocar esses dados no banco SQL usando JPA.
 - A partir desse ponto, podemos iniciar o nosso processo para colocar esses dados no banco SQL usando JPA.
