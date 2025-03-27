@@ -22,8 +22,6 @@ public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     private AtomicInteger quantidadeDeRegistrosAdicionados = new AtomicInteger(0);
-
-
     private AtomicInteger contagemDeArquivosProcessados = new AtomicInteger(0);
 
     void processaZip(Arquivo arquivoZip) {
@@ -84,7 +82,7 @@ public class Main {
             return;
         }
 
-        ExecutorService executorService = Executors.newFixedThreadPool(9);
+        ExecutorService executorService = Executors.newFixedThreadPool(11);
         for (File fileToProcess : filesToProcess) {
             Arquivo arquivo = new Arquivo(fileToProcess);
             executorService.submit(() -> processaZip(arquivo));
@@ -93,8 +91,9 @@ public class Main {
         executorService.shutdown();
 
         try {
-            while (!executorService.awaitTermination(20, TimeUnit.SECONDS)) {
-                log.info("Aguardando :: {} arquivos processados.", contagemDeArquivosProcessados.get());
+            while (!executorService.awaitTermination(15, TimeUnit.SECONDS)) {
+                log.info("Trabalho em andamento : {} arquivos já foram processados.",
+                        contagemDeArquivosProcessados.get());
             }
         } catch (InterruptedException e) {
             log.error("Processamento interrompido.", e);

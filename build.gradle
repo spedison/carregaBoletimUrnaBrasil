@@ -54,8 +54,8 @@ tasks.withType(JavaCompile) {
     options.verbose = true
     options.compilerArgs << "-Xlint:all"
     //options.deprecation = true
-    options.showDeprecation = true
-    options.showWarnings = true
+    //options.showDeprecation = true
+    //options.showWarnings = true
 }
 
 tasks.named('run', JavaExec) {

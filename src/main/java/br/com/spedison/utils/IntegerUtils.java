@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class IntegerUtils {
     final static private Logger log = LoggerFactory.getLogger(IntegerUtils.class);
-    final static Locale localeBrasil = new Locale("pt", "BR");
+    final static Locale localeBrasil = Locale.of ("pt", "BR");
     final static NumberFormat nf = NumberFormat.getInstance(localeBrasil);
 
 

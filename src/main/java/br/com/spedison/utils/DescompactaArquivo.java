@@ -66,8 +66,10 @@ public class DescompactaArquivo {
                 if (!entry.getName().equals(arquivoParaProcessar)) continue;
                 if (entry.isDirectory()) continue;
 
+                foiProcessado = true;
+
                 arquivo.setNomeArquivoDentroZip(entry.getName());
-                log.debug("Lendo arquivo: " + entry.getName());
+                log.debug("Lendo arquivo: " + entry.getName() + " dentro do Zip:" + arquivo.getNome());
 
                 //Processa o Stream do arquivo compactado. Cuidado pois o arquivo é latim1.
                 BufferedReader streamFile = new BufferedReader(new InputStreamReader(zipInputStream, StandardCharsets.ISO_8859_1));
@@ -75,11 +77,9 @@ public class DescompactaArquivo {
                 //mantive o Stream do arquivo aberto, pois o que manda é o Stream Superior (o que vem so Zip)
                 if (!ret) {
                     log.error("Erro ao processar o arquivo: " + entry.getName());
-
-                    if (streamFile.ready())
-                        streamFile.close();
+                    streamFile.close();
                 }
-                foiProcessado = true;
+                break;
             } // Fim do While na lista de arquivos do Zip.
             if (!foiProcessado)
                 zipInputStream.close();
